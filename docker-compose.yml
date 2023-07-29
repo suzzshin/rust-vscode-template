@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  rust:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rust
+    tty: true
+    working_dir: /app
+    volumes:
+      - .:/app:delegated
+      - rust-vol:/app/target
+
+volumes:
+  rust-vol:
