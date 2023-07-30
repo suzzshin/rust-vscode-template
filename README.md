@@ -11,3 +11,10 @@ Change "template" in the following files to project name
 
 * docker-compose.yml (volume name, mount directory)
 
+## TODO
+
+Errors often occur at build time, probably mounting issues. Run it again and it works.
+
+```
+error: linking with `cc` failed: exit status: 1
+```
