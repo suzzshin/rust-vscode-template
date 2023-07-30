@@ -9,7 +9,7 @@ services:
     working_dir: /app
     volumes:
       - .:/app:delegated
-      - rust-vol:/app/target
+      - rust-vol:/app/target:delegated
 
 volumes:
   rust-vol:
