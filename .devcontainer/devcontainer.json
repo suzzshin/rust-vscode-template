@@ -27,7 +27,9 @@
                 "matklad.rust-analyzer",
                 "vadimcn.vscode-lldb",
                 "bungcip.better-toml",
-                "serayuzgur.crates"
+                "serayuzgur.crates",
+ 				"rust-lang.rust-analyzer",
+ 				"dustypomerleau.rust-syntax"
             ]
         }
     }
