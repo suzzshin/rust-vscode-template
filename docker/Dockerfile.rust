@@ -1,3 +1,4 @@
+# ビルドで生成されるバイナリは glibc バージョンに依存するので極力古めの OS にしておく
 FROM rust:1.70-buster
 
 RUN apt-get update && \
