@@ -1,9 +1,23 @@
-# ビルドで生成されるバイナリは glibc バージョンに依存するので極力古めの OS にしておく
-FROM rust:1.70-buster
+# debian 系のイメージだと copilot 有効で js ファイルを開いた時に Remote Extension Server がエラーになる
+# alpine だと openssl-dev をインストールしないと cargo-edit のビルドに失敗する
+# 1.72.0 だと cargo-edit のビルドに失敗する (下記と同じエラー)
+# https://github.com/rust-lang/rust/issues/115450
+FROM rust:1.71.1-alpine3.17
 
-RUN apt-get update && \
-    apt-get -y install git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
+RUN apk update && \
+    apk add --no-cache git rust cargo && \
+    apk add --no-cache openssl-dev && \
+    apk add --virtual .build-deps curl && \
     rustup component add rls rust-analysis rust-src rustfmt clippy && \
-    cargo install cargo-edit cargo-watch
+    cargo install cargo-edit cargo-watch && \
+    apk del .build-deps
+
+## ビルドで生成されるバイナリは glibc バージョンに依存するので極力古めの OS にしておく
+#FROM rust:1.70-buster
+#
+#RUN apt-get update && \
+#    apt-get -y install git && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/lists/* && \
+#    rustup component add rls rust-analysis rust-src rustfmt clippy && \
+#    cargo install cargo-edit cargo-watch
